@@ -6,7 +6,7 @@
             <p class="text-[1rem] mt-[-3px] text-gray-600 ">Lorem ipsum dolor sit amet.</p>
         </div>
 
-        <div class="grid md:grid-cols-4 grid-cols-2 gap-4 mb-4">
+        {{-- <div class="grid md:grid-cols-4 grid-cols-2 gap-4 mb-4">
             @php
             $card = [
                 [
@@ -45,7 +45,7 @@
 
             </div>
         @endforeach
-        </div>
+        </div> --}}
         @php
             $table_head = ['Client Name', 'Subscription', 'goal', 'Coach', 'Date'];
 
@@ -71,7 +71,7 @@
         </div> --}}
         @include('Dashboard_Comp.Dash_Table', [
             'table_head' => $table_head,
-            'isManage' => true,
+            'isManage' => false,
             'Title' => "Active Client's Records",
             'isSearch' => true,
             'table_subhead' =>

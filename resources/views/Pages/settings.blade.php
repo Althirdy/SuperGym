@@ -7,43 +7,11 @@
         </div>
         <div class="lg:grid grid-cols-1 border-b  p-5 grid-cols-2 mt-10 ">
             <div class="w-[55%]">
-                <h1 class="font-medium text-[1.2rem]">Add Account</h1>
-                <p>Use a permanent address where you can receive mail.</p>
-            </div>
-            <form>
-                <div class="grid gap-6 mb-6 md:grid-cols-2 my-3">
-                    <div class="mb-2">
-                        <label for="name"
-                            class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-                        <input type="text" name="name" id="password"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            required="">
-                    </div>
-                    <div class="mb-2">
-                        <label for="email"
-                            class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                        <input type="email" name="email" id="email"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            required="">
-                    </div>
-                    <div class="mb-2">
-                        <label for="password"
-                            class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                        <input type="password" name="password" id="password"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                            required="">
-                    </div>
-                </div>
-                <button type="submit"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
-            </form>
-        </div>
-        <div class="lg:grid grid-cols-1 border-b  p-5 grid-cols-2 mt-10 ">
-            <div class="w-[55%]">
                 <h1 class="font-medium text-[1.2rem]">Update Category</h1>
                 <p>Use a permanent address where you can receive mail.</p>
             </div>
-            <form>
+            <form id="updatePriceForm" action="{{ url('/updatePrice') }}" method="POST">
+                @csrf
                 <div class="grid gap-3 mb-6 grid-cols-2 my-3">
                     @foreach ($category as $cat)
                         <div class="mb-2 col-span-1">
@@ -54,16 +22,16 @@
                                 disabled>
                         </div>
                         <div class="mb-2">
-                            <label for="price"
-                                class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                            <input type="price" name="price" id="{{ $cat->id }}" value="Php {{ $cat->price }}"
+                            <label for="price" class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Price
+                                [Php]</label>
+                            <input type="number" name="price[]" value="{{ $cat->price }}"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                            <input type="hidden" name="category_id[]" value="{{ $cat->id }}">
                         </div>
                     @endforeach
-
                 </div>
-                <button type="submit"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                <button type="button"
+                    class="updatePriceButton text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
             </form>
         </div>
         <div class="lg:grid grid-cols-1 border-b  p-5 grid-cols-2 mt-10 ">
@@ -83,17 +51,22 @@
                                 disabled>
                         </div>
                     @endforeach
-                    <div class="mb-2 col-span-1">
+                    {{-- <div class="mb-2 col-span-1">
                         <label for="name"
                             class="block mb-1 text-sm font-medium text-gray-900 dark:text-white">Goal/Expertise of
                             Coach</label>
                         <input type="text" name="category" id="add_goal" value="" placeholder="Add Goal"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                    </div>
+                    </div> --}}
                 </div>
-                <button type="submit"
-                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button>
+                {{-- <button type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm  sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Save</button> --}}
             </form>
         </div>
     </div>
 @endSection
+{{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
+
+<script>
+    
+</script>

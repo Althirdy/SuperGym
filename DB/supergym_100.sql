@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 13, 2024 at 02:32 AM
+-- Generation Time: May 26, 2024 at 03:19 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -72,7 +72,8 @@ CREATE TABLE `clients` (
 INSERT INTO `clients` (`id`, `unique_id`, `email`, `name`, `coach_id`, `goal_id`, `subscription_id`, `weight`, `status`, `expired_at`, `added_at`) VALUES
 (1, '160-zdg', 'althirdysanger@gmail.com', 'Althirdy', 1, 1, 2, 150, 0, '2024-06-11', '2024-05-11 11:01:27'),
 (2, '411-9dPY', 'aasanger1260qc@student.fatima.edu.ph', 'russ', NULL, 1, 1, 200, 0, '2025-05-11', '2024-05-11 11:02:48'),
-(3, '604-syZ', 'cabangonsherby09@gmail.com', 'Sherby', NULL, 2, 1, 130, 0, '2025-05-11', '2024-05-11 14:40:27');
+(3, '604-syZ', 'cabangonsherby09@gmail.com', 'Sherby', NULL, 2, 1, 130, 0, '2025-05-11', '2024-05-11 14:40:27'),
+(4, '268-QM2R', 'gracemyrene086@gmail.com', 'celeste', NULL, 1, 2, 150, 0, '2024-06-25', '2024-05-25 07:10:51');
 
 -- --------------------------------------------------------
 
@@ -93,8 +94,8 @@ CREATE TABLE `client_category` (
 --
 
 INSERT INTO `client_category` (`id`, `category`, `price`, `created_at`, `updated_at`) VALUES
-(1, 'STUDENT', 60, '2024-05-11 07:50:54', '2024-05-11 07:50:54'),
-(2, 'REGULAR', 70, '2024-05-11 07:50:54', '2024-05-11 07:50:54');
+(1, 'STUDENT', 65, '2024-05-11 07:50:54', '2024-05-26 00:19:26'),
+(2, 'REGULAR', 70, '2024-05-11 07:50:54', '2024-05-26 00:23:41');
 
 -- --------------------------------------------------------
 
@@ -119,7 +120,8 @@ CREATE TABLE `coaches` (
 
 INSERT INTO `coaches` (`id`, `name`, `email`, `goal_id`, `contact_no`, `description`, `created_at`, `updated_at`) VALUES
 (1, 'Cortney', 'cfonzo0@usa.gov', 1, '219-254-2784', NULL, '2024-05-10 04:35:30', '2024-05-10 04:35:30'),
-(2, 'Ngitngit', 'hehefo7014@ahieh.com', 1, '1231-412-3123', NULL, '2024-05-12 02:35:46', '2024-05-12 02:35:46');
+(2, 'Ngitngit', 'hehefo7014@ahieh.com', 1, '1231-412-3123', NULL, '2024-05-12 02:35:46', '2024-05-12 02:35:46'),
+(3, 'Russell', 'russ@gmail.com', 1, '0930-143-1413', NULL, '2024-05-25 07:08:20', '2024-05-25 07:08:20');
 
 -- --------------------------------------------------------
 
@@ -142,7 +144,13 @@ CREATE TABLE `daily_logs` (
 INSERT INTO `daily_logs` (`id`, `name`, `category_id`, `created_at`, `updated_at`) VALUES
 (1, 'she', 1, '2024-05-11 07:51:45', '2024-05-11 07:51:45'),
 (2, 'AL', 2, '2024-05-11 14:46:56', '2024-05-11 14:46:56'),
-(3, 'SHE', 2, '2024-05-12 09:55:19', '2024-05-12 09:55:19');
+(3, 'SHE', 2, '2024-05-12 09:55:19', '2024-05-12 09:55:19'),
+(4, 'SHE', 1, '2024-05-13 12:41:39', '2024-05-13 12:41:39'),
+(5, 'Al', 2, '2024-05-13 12:52:39', '2024-05-13 12:52:39'),
+(6, 'albert', 2, '2024-05-13 12:52:51', '2024-05-13 12:52:51'),
+(7, 'hanns', 2, '2024-05-13 12:53:09', '2024-05-13 12:53:09'),
+(8, 'rusell', 1, '2024-05-25 07:06:25', '2024-05-25 07:06:25'),
+(9, 'albert', 1, '2024-05-25 20:02:33', '2024-05-25 20:02:33');
 
 -- --------------------------------------------------------
 
@@ -188,6 +196,27 @@ INSERT INTO `goals` (`id`, `goal`, `created_at`, `updated_at`) VALUES
 (1, 'BODY BUILDING', '2024-05-10 04:24:21', '2024-05-10 04:24:21'),
 (2, 'YOGA', '2024-05-10 04:24:21', '2024-05-10 04:24:21'),
 (3, 'WEIGHT LOSS', '2024-05-10 04:24:21', '2024-05-10 04:24:21');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gymbilog_user`
+--
+
+CREATE TABLE `gymbilog_user` (
+  `id` int(11) NOT NULL,
+  `email` text NOT NULL,
+  `password` text NOT NULL,
+  `username` text NOT NULL,
+  `added_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `gymbilog_user`
+--
+
+INSERT INTO `gymbilog_user` (`id`, `email`, `password`, `username`, `added_at`) VALUES
+(1, 'gymbilog@gmail.com', '5f4dcc3b5aa765d61d8327deb882cf99', 'GymBilogAdmin', '2024-05-26 08:42:57');
 
 -- --------------------------------------------------------
 
@@ -245,7 +274,9 @@ INSERT INTO `member_log` (`id`, `client_id`, `created_at`, `updated_at`) VALUES
 (1, 2, '2024-05-11 13:57:44', '2024-05-11 13:57:44'),
 (4, 1, '2024-05-11 14:37:00', '2024-05-11 14:37:00'),
 (5, 3, '2024-05-11 14:44:30', '2024-05-11 14:44:30'),
-(6, 2, '2024-05-12 11:20:35', '2024-05-12 11:20:35');
+(6, 2, '2024-05-12 11:20:35', '2024-05-12 11:20:35'),
+(7, 4, '2024-05-25 14:43:48', '2024-05-25 14:43:48'),
+(8, 3, '2024-05-25 14:44:02', '2024-05-25 14:44:02');
 
 -- --------------------------------------------------------
 
@@ -305,7 +336,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('70JylxHe2VI6PyXj6S76KEBzEqnMyLxRjgnmT25W', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36', 'YTozOntzOjY6Il90b2tlbiI7czo0MDoiUWZ5a1JoNE94dmpvbk5SNHZ0QkdQdDdoR2RETk80VEw3V1FoMUg5OCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzE6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9EYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX19', 1715526059);
+('A47xZ0wbeq2sO69TXNDrawjGbYFeu18rrwFFAz71', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiemRjelk3NU1tVGFjUll4eTcwU0RlSVRBODFjSkswa2QwMUFIWVIxMCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6MzM6Imh0dHA6Ly8xMjcuMC4wLjE6ODAwMC9sb2dpbl9hZG1pbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6MTY6ImNvdW50X21lbWJlcl9sb2ciO2E6Mjp7czo0OiJkYXlzIjthOjg6e3M6MjoiRDciO2k6MDtzOjI6IkQ2IjtpOjI7czoyOiJENSI7aTowO3M6MjoiRDQiO2k6MDtzOjI6IkQzIjtpOjA7czoyOiJEMiI7aTowO3M6MjoiRDEiO2k6MDtzOjU6IlRvdGFsIjtpOjI7fXM6NToidG90YWwiO2k6Mjt9czoxNToiY291bnRfZGFpbHlfbG9nIjthOjI6e3M6NDoiZGF5cyI7YTo4OntzOjI6IkQ3IjtpOjE7czoyOiJENiI7aToxO3M6MjoiRDUiO2k6MDtzOjI6IkQ0IjtpOjA7czoyOiJEMyI7aTowO3M6MjoiRDIiO2k6MDtzOjI6IkQxIjtpOjA7czo1OiJUb3RhbCI7aToyO31zOjU6InRvdGFsIjtpOjI7fX0=', 1716686310);
 
 -- --------------------------------------------------------
 
@@ -408,6 +439,12 @@ ALTER TABLE `goals`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `gymbilog_user`
+--
+ALTER TABLE `gymbilog_user`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `jobs`
 --
 ALTER TABLE `jobs`
@@ -468,7 +505,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `client_category`
@@ -480,13 +517,13 @@ ALTER TABLE `client_category`
 -- AUTO_INCREMENT for table `coaches`
 --
 ALTER TABLE `coaches`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `daily_logs`
 --
 ALTER TABLE `daily_logs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -501,16 +538,22 @@ ALTER TABLE `goals`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `gymbilog_user`
+--
+ALTER TABLE `gymbilog_user`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `jobs`
 --
 ALTER TABLE `jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `member_log`
 --
 ALTER TABLE `member_log`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `migrations`

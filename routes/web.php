@@ -1,10 +1,13 @@
 <?php
 
+use App\Http\Controllers\Auth;
 use App\Http\Controllers\CoachController;
 use App\Http\Controllers\Dashboard;
-
-
+use App\Http\Controllers\Login;
 use Illuminate\Support\Facades\Route;
+Route::get('/',function(){
+    return view('landing');
+});
 
 Route::get('/Dashboard', [Dashboard::class, 'index']);
 Route::get('/Daily_Logs', [Dashboard::class, 'Daily_logs']);
@@ -17,7 +20,21 @@ Route::post('/client_log', [Dashboard::class, 'client_log']);
 Route::get('/Coaches',[CoachController::class,'index']);
 Route::post('/add_coach',[CoachController::class,'insertCoach']);
 Route::get('/Settings',[CoachController::class,'ShowSettings']);
+Route::post('/updatePrice',[Dashboard::class,'Update_Price']);
+Route::get('/login_admin',function(){
 
+    return view('login');
+});
+
+Route::post('/validate_login',[Auth::class, 'checkLogin'])->name('validate_login');
+
+
+Route::get('/session',function(){
+    session()->forget('gymbilog_user');
+    return redirect('/');
+});
+
+Route::get('/Logout',[Auth::class,'logout']);
 // Route::get('/', function () {
 //     $loginDate = Carbon::now()->toDateString();
 //     $loginTime = Carbon::now()->toTimeString();

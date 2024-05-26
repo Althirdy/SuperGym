@@ -6,7 +6,7 @@
             <p class="text-[1rem] mt-[-3px] text-gray-600 ">Meet Our Expert Team of SuperGym Coaches!</p>
         </div>
 
-        <div class="grid md:grid-cols-4 grid-cols-2 gap-4 mb-4">
+        {{-- <div class="grid md:grid-cols-4 grid-cols-2 gap-4 mb-4">
             @php
             $card = [
                 [
@@ -45,7 +45,7 @@
 
             </div>
         @endforeach
-        </div>
+        </div> --}}
         @php
             $table_head = ['Coach Name', 'Contact No.', 'Email', 'Expertise', 'Date'];
 
@@ -66,7 +66,7 @@
 
         @include('Dashboard_Comp.Dash_Table', [
             'table_head' => $table_head,
-            'isManage' => true,
+            'isManage' => false,
             'Title' => 'Coaches',
             'isSearch' => true,
             'table_subhead' => 'Discover Our Dedicated Team: SuperGym Coaches at Your Service!',

@@ -28,11 +28,11 @@ class Dashboard extends Controller
         Config::set('app.timezone', 'Asia/Manila');
     }
     public function index()
-    {   
+    {
         //FOR CHARTS
         $count = new daily_logs();
         $count_member = new member_log();
-        $count_member_log= $count_member->getPastDaysCount();
+        $count_member_log = $count_member->getPastDaysCount();
         $count_daily_log =  $count->getPastDaysCount();
         //=============================//
         // print_r($count_daily_log);
@@ -64,16 +64,22 @@ class Dashboard extends Controller
         $today_logs = daily_logs::whereDate('created_at', '=', date('Y-m-d'))->count();
 
 
-        return view('Pages.Dashboard', [
-            'dash_data' => $client_data,
-            'client_count' => $client_count,
-            'coaches_count' => $coaches_count,
-            'today_revenue' => $logData->total_price,
-            'today_logs' => $today_logs,
-            'total_traffic' => $count_member_log['total'] + $count_daily_log['total'],
-            'member' => $count_member_log['total'],
-            'not_member' => $count_daily_log['total'],
-        ]);
+        if(session()->has('gymbilog_user')){
+            return view('Pages.Dashboard', [
+                'dash_data' => $client_data,
+                'client_count' => $client_count,
+                'coaches_count' => $coaches_count,
+                'today_revenue' => $logData->total_price,
+                'today_logs' => $today_logs,
+                'total_traffic' => $count_member_log['total'] + $count_daily_log['total'],
+                'member' => $count_member_log['total'],
+                'not_member' => $count_daily_log['total'],
+            ]);
+
+        }else{
+            return redirect('/');
+        }
+      
     }
 
     public function Daily_logs(Request $request)
@@ -109,36 +115,60 @@ class Dashboard extends Controller
 
         // dump($daily_data->links()) ;
 
-        print_r(json_decode($daily_data));
-        return view('Pages.Daily', [
-            'table_data' => $daily_data,
-            'client_category' => $client_category,
-            'daily_revenue' => $logData->total_price,
-            'regular' => $regular,
-            'student' => $student
-        ]);
+    
+        if(session()->has('gymbilog_user')){
+            return view('Pages.Daily', [
+                'table_data' => $daily_data,
+                'client_category' => $client_category,
+                'daily_revenue' => $logData->total_price,
+                'regular' => $regular,
+                'student' => $student
+            ]);
+
+        }else{
+            return redirect('/');
+        }
     }
 
     public function Members_logs(Request $request)
     {
+        $search = $request->query('search');
         $date = $request->query('date');
         if ($date === null || $date === "") {
             // Handle the case when $date is not provided
             // For example, display logs for today's date
             $date = now()->format('Y-m-d');
         }
-        $member_log = member_log::select('c.name as col1', 's.description as col2', 's.price as col3', DB::raw('COALESCE(co.name, "No coach") as col4'), DB::raw('DATE(member_log.created_at) AS col5'))
-            ->join('clients as c', 'c.id', '=', 'member_log.client_id')
-            ->join('subscriptions as s', 'c.subscription_id', '=', 's.id')
-            ->leftJoin('coaches as co', 'co.id', '=', 'c.coach_id')
-            ->whereDate('member_log.created_at', $date)
-            ->paginate(8);
+        if ($search !== null && $search !== "") {
+            $member_log = member_log::select('c.name as col1', 's.description as col2', 's.price as col3', DB::raw('COALESCE(co.name, "No coach") as col4'), DB::raw('DATE(member_log.created_at) AS col5'))
+                ->join('clients as c', 'c.id', '=', 'member_log.client_id')
+                ->join('subscriptions as s', 'c.subscription_id', '=', 's.id')
+                ->leftJoin('coaches as co', 'co.id', '=', 'c.coach_id')
+                ->where('c.name', 'LIKE', '%' . $search . '%') // Adjust this condition based on your search field
+                ->paginate(8);
+        } else {
+            $member_log = member_log::select('c.name as col1', 's.description as col2', 's.price as col3', DB::raw('COALESCE(co.name, "No coach") as col4'), DB::raw('DATE(member_log.created_at) AS col5'))
+                ->join('clients as c', 'c.id', '=', 'member_log.client_id')
+                ->join('subscriptions as s', 'c.subscription_id', '=', 's.id')
+                ->leftJoin('coaches as co', 'co.id', '=', 'c.coach_id')
+                ->whereDate('member_log.created_at', $date)
+                ->paginate(8);
+        }
+
 
 
         // Print the array
-        return view('Pages.Members', [
-            'table_data' => $member_log
-        ]);
+        // return view('Pages.Members', [
+        //     'table_data' => $member_log
+        // ]);
+
+        if(session()->has('gymbilog_user')){
+            return view('Pages.Members', [
+                'table_data' => $member_log
+            ]);
+        }else{
+            return redirect('/');
+        }
     }
 
 
@@ -191,12 +221,23 @@ class Dashboard extends Controller
             ->select('name', 'contact_no', 'id')
             ->get();
         // print_r(json_decode($goal));
-        return view('Pages.client', [
-            'table_data' => $table_data,
-            'subscription' => $subs,
-            'goal_data' => $goal,
-            'coach' => $coaches
-        ]);
+        // return view('Pages.client', [
+        //     'table_data' => $table_data,
+        //     'subscription' => $subs,
+        //     'goal_data' => $goal,
+        //     'coach' => $coaches
+        // ]);
+
+        if(session()->has('gymbilog_user')){
+            return view('Pages.client', [
+                'table_data' => $table_data,
+                'subscription' => $subs,
+                'goal_data' => $goal,
+                'coach' => $coaches
+            ]);
+        }else{
+            return redirect('/');
+        }
     }
 
     public function getCoachesByCategory($category_id = 1)
@@ -291,5 +332,27 @@ class Dashboard extends Controller
 
         Mail::to($isClient['email'])->send(new LogEmail($isClient['client_name'], $loginDate,  $formattedTime));
         return response()->json(['status' => true, 'message' => 'Data saved Successfully']);
+    }
+
+
+    public function Update_Price(Request $request)
+    {
+
+        $categoryIds = $request->input('category_id');
+        $prices = $request->input('price');
+
+        // Iterate over the category IDs and corresponding prices
+        foreach ($categoryIds as $index => $categoryId) {
+            // Find the client_category record by its ID
+            $category = client_category::find($categoryId);
+            if ($category) {
+                // Update the price of the category
+                $category->price = $prices[$index];
+                $category->save();
+            }
+        }
+
+        // Return a success response
+        return response()->json(['message' => 'Prices updated successfully','status'=>true]);
     }
 }

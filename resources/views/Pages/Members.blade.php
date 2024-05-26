@@ -2,8 +2,8 @@
 @section('content')
     <div class="p-4  lg:w-[70%] md:mx-auto rounded-lg dark:border-gray-700">
         <div class="mb-5">
-            <h1 class="text-[1.3rem] font-medium">Daily Logs</h1>
-            <p class="text-[1rem] mt-[-3px] text-gray-600 ">Lorem ipsum dolor sit amet.</p>
+            <h1 class="text-[1.3rem] font-medium">Members Log</h1>
+            <p class="text-[1rem] mt-[-3px] text-gray-600 ">Your clients Daily Logs</p>
         </div>
 
         <div class="grid md:grid-cols-4 grid-cols-2 gap-4 mb-4">
@@ -58,7 +58,7 @@
                     ]
                 ) --}}
             </div>
-            <div class="col-span-2">
+            {{-- <div class="col-span-2">
                 @include('Dashboard_Comp.pie_chart',
                 [
                     'Title'=>'Program'
@@ -66,7 +66,7 @@
                 ]
 
                 )
-            </div>
+            </div> --}}
 
         </div>
 

@@ -12,7 +12,7 @@
     class="fixed top-0 left-0 z-40 w-[14rem] h-screen transition-transform -translate-x-full sm:translate-x-0"
     aria-label="Sidebar">
     <div class="h-full px-3 py-4 overflow-y-auto bg-[#FEFEFE] dark:bg-gray-800">
-        <a href="https://flowbite.com/" class="flex items-center ps-2.5 my-5">
+        <a href="{{url('Dashboard')}}" class="flex items-center ps-2.5 my-5">
             <img src="{{ url('icons/logo.png') }}" class="h-12 me-3 " alt="Flowbite Logo" />
             <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">SuperGym</span>
         </a>
@@ -39,6 +39,10 @@
                         'icon' => 'settings.png',
                         'item_name' => 'Settings',
                     ],
+                    [
+                        'icon' => 'logout.png',
+                        'item_name' => 'Logout',
+                    ]
                 ];
 
                 $drop_items = [

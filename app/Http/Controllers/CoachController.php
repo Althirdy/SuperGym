@@ -14,12 +14,23 @@ use Illuminate\Support\Facades\Validator;
 
 class CoachController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $coach = coaches::select('coaches.name as col1', 'coaches.email as col3', 'coaches.contact_no as col2', 'g.goal as col4', DB::raw('DATE(coaches.created_at) as col5'))
-            ->join('goals as g', 'g.id', '=', 'coaches.goal_id')
-            ->orderBy('coaches.created_at', 'DESC')
-            ->paginate(8);
+        $search = $request->query('search');
+
+        if ($search !== null && $search !== "") {
+            $coach = coaches::select('coaches.name as col1', 'coaches.email as col3', 'coaches.contact_no as col2', 'g.goal as col4', DB::raw('DATE(coaches.created_at) as col5'))
+                ->join('goals as g', 'g.id', '=', 'coaches.goal_id')
+                ->where('coaches.name', 'LIKE', '%' . $search . '%') // Adjust this condition based on your search field
+                ->orderBy('coaches.created_at', 'DESC')
+                ->paginate(8);
+        } else {
+            $coach = coaches::select('coaches.name as col1', 'coaches.email as col3', 'coaches.contact_no as col2', 'g.goal as col4', DB::raw('DATE(coaches.created_at) as col5'))
+                ->join('goals as g', 'g.id', '=', 'coaches.goal_id')
+                ->orderBy('coaches.created_at', 'DESC')
+                ->paginate(8);
+        }
+
         $goal = Goals::all('id', 'goal');
 
 
