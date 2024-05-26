@@ -5,8 +5,16 @@ use App\Http\Controllers\CoachController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Login;
 use Illuminate\Support\Facades\Route;
+use App\Models\client_category;
+use App\Models\subscriptions;
+
 Route::get('/',function(){
-    return view('landing');
+    $clientCategories = client_category::all();
+    $subscription = subscriptions::all();
+    $subs = $subscription->pluck('price');
+    $prices = $clientCategories->pluck('price');
+    // print_r($prices);
+    return view('landing',['data_price'=>$prices,"data_subs"=>$subs]);
 });
 
 Route::get('/Dashboard', [Dashboard::class, 'index']);

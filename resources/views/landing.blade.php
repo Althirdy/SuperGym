@@ -87,20 +87,23 @@
         <div class="grid max-w-screen-xl px-4 pt-6 mx-auto lg:gap-8 xl:gap-0 lg:grid-cols-12">
             <div class="mr-auto place-self-center lg:col-span-7">
                 <h1
-                    class="max-w-2xl mb-4 text-4xl font-bold tracking-tight leading-loose md:text-5xl xl:text-6xl text-black pt-10">
+                    class="max-w-2xl mb-4 text-center lg:text-start text-5xl font-bold   md:text-5xl xl:text-6xl text-black pt-10">
                     Get healthy body<br>
                     with the perfect <br>exercise</h1>
-                <p class="max-w-2xl my-6 font-sm lg:mb-8 text-gray-700">
+                <p class="max-w-2xl my-6  text-center lg:text-start font-sm lg:mb-8 text-gray-700">
                     An all-in-one solution for automating and organizing everything <br>from daily session bookings to
                     monthly membership
                     tracking, <br>helping individuals achieve their fitness goals and <br>simplify their gym management
                     experience. </p>
 
 
-                <a href="#about"
-                    class="inline-block bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded my-4">Get
-                    Started</a>
+                <div class="flex items-center justify-center lg:justify-start">
+                    <a href="#about"
+                        class="inline-block  bg-blue-500 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded my-2">Get
+                        Started
+                    </a>
 
+                </div>
                 <div class="mt-5 flex flex-wrap items-center justify-center gap-4">
                     <a href="#"
                         class="flex h-20 w-40 flex-col items-center justify-center rounded-md sm:w-32 md:w-48 lg:w-40">
@@ -151,7 +154,7 @@
 
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img src="{{asset('assets/model1.png')}}" alt="mockup">
+                <img src="{{ asset('assets/model1.png') }}" alt="mockup">
             </div>
         </div>
     </section>
@@ -213,7 +216,7 @@
 
         <div class="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
             <div class="font-light text-white sm:text-lg	">
-                <h2 class="mb-4 text-5xl tracking-tight font-extrabold text-black leading-normal ">Get Ready To Reach
+                <h2 class="mb-4 text-4xl text-center lg:text-start tracking-tight font-extrabold text-black leading-normal ">Get Ready To Reach
                     <br>Your Fitness Goals
                 </h2>
                 <p class=" max-w-2xl my-6 font-sm lg:mb-8 text-gray-700">Gym Bilog empowers users to turn aspirations
@@ -254,8 +257,8 @@
 
 
             <div class="grid grid-cols-2 gap-4 mt-8">
-                <img class="w-full rounded-lg" src="./assets/boy1.jpg" alt="office content 1">
-                <img class="mt-4 w-full lg:mt-10 rounded-lg" src="./assets/boy2.jpg" alt="office content 2">
+                <img class="w-full rounded-lg" src="{{ asset('icons/1.jpg') }}" alt="office content 1">
+                <img class="mt-4 w-full lg:mt-10 rounded-lg" src="{{ asset('icons/2.jpg') }}" alt="office content 2">
             </div>
         </div>
     </section>
@@ -277,7 +280,7 @@
                 <div
                     class="max-w-sm max-h-80 bg-transparent hover:border-blue-500 border-2 border-slate-200 rounded-xl shadow dark:bg-white-800 dark:border-white-700 mx-2">
                     <a href="#">
-                        <img class="size-16 mt-5 mx-5 mb-3" src="{{asset('assets/strength.png')}}" alt="">
+                        <img class="size-16 mt-5 mx-5 mb-3" src="{{ asset('assets/strength.png') }}" alt="">
                     </a>
                     <div class="p-5">
                         <a href="#">
@@ -293,7 +296,7 @@
                     class="max-w-sm  max-h-80 bg-transparent hover:border-blue-500 border-2 border-slate-200 rounded-xl shadow dark:bg-white-800 dark:border-white-700 mx-2">
                     <a href="#">
 
-                        <img class="size-20 mt-5 mx-5" src="{{asset('assets/zumba.png')}}" alt="">
+                        <img class="size-20 mt-5 mx-5" src="{{ asset('assets/zumba.png') }}" alt="">
                     </a>
                     <div class="px-5 pt-3 pb-5">
                         <a href="#">
@@ -309,7 +312,7 @@
                 <div
                     class="max-w-sm  max-h-80 bg-transparent hover:border-blue-500 border-2 border-slate-200 rounded-xl shadow dark:bg-white-800 dark:border-white-700 mx-2">
                     <a href="#">
-                        <img class="size-20 mt-2 mx-5" src="{{asset('assets/dumbbell.png')}}" alt="">
+                        <img class="size-20 mt-2 mx-5" src="{{ asset('assets/dumbbell.png') }}" alt="">
                     </a>
                     <div class="p-5">
                         <a href="#">
@@ -325,7 +328,7 @@
                 <div
                     class="max-w-sm  max-h-80 bg-transparent hover:border-blue-500 border-2 border-slate-200 rounded-xl shadow dark:bg-white-800 dark:border-white-700 mx-2">
                     <a href="#">
-                        <img class="size-16 mt-5 mx-5" src="{{asset('assets/weight-loss.png')}}" alt="">
+                        <img class="size-16 mt-5 mx-5" src="{{ asset('assets/weight-loss.png') }}" alt="">
                     </a>
                     <div class="p-5">
                         <a href="#">
@@ -362,7 +365,7 @@
                         <div class="flex items-center justify-between gap-x-4">
                             <h2 id="product1" class="mb-5 text-lg font-semibold leading-8 text-black">Daily</h2>
                         </div>
-                        <span class="mr-2 text-5xl font-bold">₱70 </span>
+                        <span class="mr-2 text-5xl font-bold">₱ {{$data_price[1]}} </span>
                         <span class="text-gray-500 dark:text-gray-400">/Daily</span>
                         </p>
                         <p class="mt-4 text-sm leading-6 text-gray-700">Unlock the doors to a healthier, stronger you
@@ -377,7 +380,7 @@
                                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
                                         clip-rule="evenodd"></path>
                                 </svg>
-                                <span>₱60 Student Price with school ID</span>
+                                <span>₱ {{$data_price[0]}} Student Price with school ID</span>
                             </li>
                             <li class="flex items-center space-x-3">
                                 <!-- Icon -->
@@ -391,9 +394,6 @@
                             </li>
 
                         </ul>
-                        <a href="/order" aria-describedby="product3"
-                            class="bg-zinc-500 text-white hover:bg-zinc-600 focus-visible:outline-white mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">Subscribe
-                            Now</a>
                     </div>
 
                     <!-- M0nthly -->
@@ -401,7 +401,7 @@
                         <div class="flex items-center justify-between gap-x-4">
                             <h2 id="product1" class="mb-5 text-lg font-semibold leading-8 text-black">Monthly</h2>
                         </div>
-                        <span class="mr-2 text-5xl font-bold">₱850 </span>
+                        <span class="mr-2 text-5xl font-bold">₱ {{$data_subs[1]}} </span>
                         <span class="text-gray-500 dark:text-gray-400">/Monthly</span>
                         </p>
                         <p class="mt-4 text-sm leading-6 text-gray-700">Get ready to conquer your fitness dreams with
@@ -430,9 +430,7 @@
                             </li>
 
                         </ul>
-                        <a href="/order" aria-describedby="product3"
-                            class="bg-zinc-500 text-white hover:bg-zinc-600 focus-visible:outline-gray mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">Subscribe
-                            Now</a>
+                  
                     </div>
                     <!-- Yearly -->
                     <div class="bg-white/5 ring-2 ring-blue-500 rounded-3xl p-8 xl:p-10">
@@ -441,7 +439,7 @@
                             <p class="rounded-full bg-blue-500 px-2.5 py-1 text-xs font-semibold leading-5 text-white">
                                 Most popular</p>
                         </div>
-                        <span class="mr-2 text-5xl font-bold">₱7000 </span>
+                        <span class="mr-2 text-5xl font-bold">₱ {{$data_subs[0]}} </span>
                         <span class="text-gray-500 dark:text-gray-400">/Yeary</span>
                         </p>
                         <p class="mt-4 text-sm leading-6 text-gray-700">Get a whole year of fitness support and
@@ -470,9 +468,7 @@
                             </li>
 
                         </ul>
-                        <a href="/order" aria-describedby="product2"
-                            class="bg-blue-500 hover:bg-blue-700 text-white mt-6 block rounded-md py-2 px-3 text-center text-sm font-semibold leading-6 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2">Subscribe
-                            Now</a>
+
                     </div>
 
 
